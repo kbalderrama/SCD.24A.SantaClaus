@@ -20,4 +20,4 @@ El código consta de dos clases principales: `SantaClaus` y `Elf`.
 Para ejecutar el programa, simplemente ejecuta el script de Python en tu terminal:
 
 ```bash
-python santa_claus_problem.py
+python hilo_santa.py

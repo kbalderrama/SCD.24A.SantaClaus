@@ -15,6 +15,7 @@ class Reindeer(threading.Thread):
             time.sleep(random.randint(10, 20))
             with SantaClaus.print_lock:
                 print(f"{self.name}: ¡He vuelto de vacaciones!")
+time.sleep(10)
 
             # Incrementa el contador de renos
             SantaClaus.reindeer_count += 1

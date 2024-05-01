@@ -2,7 +2,7 @@ import threading
 import time
 import random
 
-from hilo_santa import Elf, SantaClaus
+from hilo_santa import SantaClaus, Elf
 
 class Reindeer(threading.Thread):
     def __init__(self, name):
@@ -11,12 +11,18 @@ class Reindeer(threading.Thread):
 
     def run(self):
         while True:
-            # Simulando el tiempo que un reno tarda en necesitar a Santa
+            # Simulando el tiempo que un reno tarda en volver de vacaciones
             time.sleep(random.randint(10, 20))
-            print(f"{self.name}: ¡Necesito ayuda de Santa!")
+            with SantaClaus.print_lock:
+                print(f"{self.name}: ¡He vuelto de vacaciones!")
+time.sleep(10)
 
-            # Despierta a Santa
-            reindeer_wake_event.set()
+            # Incrementa el contador de renos
+            SantaClaus.reindeer_count += 1
+
+            # Despierta a Santa si todos los renos han vuelto
+            if SantaClaus.reindeer_count == 9:
+                reindeer_wake_event.set()
 
 # Creamos el evento para despertar a Santa por los renos
 reindeer_wake_event = threading.Event()
